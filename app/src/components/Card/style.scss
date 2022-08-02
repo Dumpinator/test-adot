@@ -1,0 +1,108 @@
+.card {
+    max-width: 458px;
+    max-height: 338px;
+    background-color: #fff;
+    border-radius: 0 0 4px 4px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 30px;
+    overflow: hidden;
+
+
+    &__image {
+        height: 175px;
+        background-size: cover;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+    }
+
+    &__content {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .infos {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &__content {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+
+                .title {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    margin: 0;
+                }
+                .address {
+                    font-size: 0.8em;
+                    margin: 0;
+                }
+            }
+        }
+
+    }
+
+    .stats {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        gap: 2em;
+        margin-top: 34px;
+
+        span {
+            font-size: 0.8em;
+            display: flex;
+            justify-content: center;
+            padding: 0.6em;
+        }
+    }
+
+    input[type=checkbox]{
+        height: 0;
+        width: 0;
+        visibility: hidden;
+    }
+
+    label {
+        cursor: pointer;
+        text-indent: -9999px;
+        width: 20px;
+        height: 10px;
+        background: #C6C5C5;
+        display: block;
+        border-radius: 100px;
+        position: relative;
+    }
+
+    label:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 9px;
+        height: 9px;
+        background: #FFF;
+        border-radius: 9px;
+        transition: 0.3s;
+    }
+
+    input:checked + label {
+        background: #9CEAC7;
+    }
+
+    input:checked + label:after {
+        left: calc(100%);
+        transform: translateX(-100%);
+        background: #3AD58F;
+    }
+
+    label:active:after {
+        width: 13px;
+    }
+}
