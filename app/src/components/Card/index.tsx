@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { IDataContext } from "../../App";
+import { ICard } from "../../App";
 import './style.scss';
 
 interface Props {
-  data: IDataContext;
+  data: ICard;
 }
 
 const Card: React.FunctionComponent<Props> = ({data}) => {

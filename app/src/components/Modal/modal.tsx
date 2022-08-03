@@ -16,7 +16,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
   headerText,
 }) => {
 
-    const onKeyDown = (event: KeyboardEvent) => {
+  const onKeyDown = (event: KeyboardEvent) => {
     if (event.keyCode === 27 && isShown) {
       hide();
     }

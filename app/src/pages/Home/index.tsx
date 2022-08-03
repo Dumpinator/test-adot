@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppCtx, ICard } from "../../App";
+import { nanoid } from 'nanoid'
 import CardsList from "../../components/CardsList/CardsList";
 import { Modal } from "../../components/Modal/modal";
 import { useModal } from "../../useModal";
@@ -7,24 +9,53 @@ import './style.scss';
 const Home: React.FunctionComponent = () => {
 
   const { isShown, toggle } = useModal();
+  const { addCard } = useContext(AppCtx);
+
+  const [formData, setFormData] = React.useState<ICard | {}>();
+
+  const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
+    setFormData({
+      id: nanoid(),
+      ...formData,
+      [e.currentTarget.id]: e.currentTarget.value,
+    });
+  };
+
+  const handleSaveCard = (e: React.FormEvent, formData: ICard| any) => {
+    e.preventDefault();
+    addCard(formData);
+  };
 
   const content = <React.Fragment>
     <form>
-      <label><input type="text" name="name" placeholder="Nom de la destination" /></label>
-      <label><input type="text" name="address" placeholder="Adresse" /></label>
+      <label><input onChange={handleForm} type="text" id="title" placeholder="Nom de la destination" /></label>
+      <label><input onChange={handleForm} type="text" id="address" name="address" placeholder="Adresse" /></label>
       <label><input type="text" name="image" placeholder="Lien de l'image" /></label>
       <div className="stats">
-        <label><input type="number" name="population" placeholder="Nb Habitants" /></label>
-        <label><input type="number" name="booking" placeholder="Nb Hôtels" /></label>
-        <label><input type="number" name="cost" placeholder="Revenu Moy" /></label>
-        <label><input type="number" name="area" placeholder="Superficie" /></label>
+        <input type="number" onChange={handleForm} id="population" name="population" placeholder="Nb Habitants" />
+        <input type="number" onChange={handleForm} id="booking" name="booking" placeholder="Nb Hôtels" />
+        <input type="number" onChange={handleForm} id="cost" name="cost" placeholder="Revenu Moy" />
+        <input type="number" onChange={handleForm} id="area" name="area" placeholder="Superficie" />
       </div>
-      <input type="submit" value="Submit" />
+      <div className="switch">
+        <input type="checkbox" onChange={handleForm} id="active" defaultChecked={false}/>
+        <label htmlFor="active">Activer</label>
+      </div>
+      <div className="btn">
+        <button className="btn__cancel" onClick={toggle}>Cancel</button>
+        <button type="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            handleSaveCard(e, formData);
+            toggle();
+          }}
+        >Confirm</button>
+      </div>
     </form>
   </React.Fragment>;
 
   return <div className="container">
-    <div className="header">
+    <div className="headerPage">
       <h1>Destination</h1>
       <button onClick={toggle}>+ Ajouter</button>
     </div>

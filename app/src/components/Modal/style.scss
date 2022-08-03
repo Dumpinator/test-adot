@@ -24,19 +24,140 @@
 	position: relative;
 	margin: auto;
 	border-radius: 8px;
+
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+
+	form {
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		label {
+			margin-bottom: 10px;
+			width: 100%;
+
+			&:nth-child(1), &:nth-child(2), &:nth-child(3) {
+				border-radius: 4px;
+
+				input {
+					width: 100%;
+					padding: 10px 0 10px 10px;
+					border: none;
+					background-color: #F3F3F3;
+				}
+			}
+		}
+		.stats {
+			display: flex;
+			gap: 5px;
+			padding: 10px 0;
+
+			input {
+				padding: 10px 0 10px 10px;
+				border: none;
+				background-color: #F3F3F3;
+			}
+		}
+
+		.switch {
+			display: flex;
+			width: 100%;
+
+
+
+			input[type=checkbox]{
+				height: 0;
+				width: 0;
+				visibility: hidden;
+			}
+
+			.switchForm {
+				color: red;
+
+			}
+
+			& > label {
+				text-indent: 150%;
+				color: #C6C5C5;
+				cursor: pointer;
+				width: 20px;
+				height: 10px;
+				background: #C6C5C5;
+				display: block;
+				border-radius: 100px;
+				position: relative;
+			}
+
+			label:after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 9px;
+				height: 9px;
+				background: #FFF;
+				border-radius: 9px;
+				transition: 0.3s;
+			}
+
+			input:checked + label {
+				background: #9CEAC7;
+				color: #3AD58F;
+			}
+
+			input:checked + label:after {
+				left: calc(100%);
+				transform: translateX(-100%);
+				background: #3AD58F;
+			}
+
+			label:active:after {
+				width: 13px;
+			}
+		}
+
+		.btn {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-end;
+
+			button {
+				border: none;
+				background-color: #FFF;
+				padding: 10px 10px 0 10px;
+				color: #C6C5C5;
+				font-size: 0.9em;
+				text-transform: uppercase;
+				font-weight: bold;
+				&:hover {
+					cursor: pointer;
+				}
+				&:last-child {
+					color: #3AD58F;
+				}
+			}
+		}
+	}
 }
 
 .header {
 	border-radius: 8px 8px 0 0;
 	display: flex;
 	justify-content: space-between;
-	padding: 0.3rem;
+	padding: 10px;
 }
 
-headerText {
-	color: #fff;
+.headerText {
+	color: black;
 	align-self: center;
-	color: lightgray;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 0;
 }
 
 .closeButton {
@@ -45,7 +166,7 @@ headerText {
 	border-radius: 3px;
 	margin-left: 0.5rem;
 	background: none;
-	:hover {
+	&:hover {
 		cursor: pointer;
 	}
 }

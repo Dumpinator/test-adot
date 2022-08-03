@@ -1,15 +1,18 @@
 import React, { useContext } from "react";
-import { AppCtx, IDataContext } from "../../App";
+import { AppCtx } from "../../App";
 import Card from "../Card";
 import './style.scss';
 
 const CardsList: React.FunctionComponent = () => {
 
-  const dataContext = useContext(AppCtx);
+  const { cards } = useContext(AppCtx);
 
   return <div className="cardsList" >
     {
-      dataContext?.map((item: IDataContext) => { return <Card key={item.id} data={item} /> })}
+      cards.map( item => {
+        return <Card key={item.id} data={item} />
+      })
+    }
   </div>
 }
 
