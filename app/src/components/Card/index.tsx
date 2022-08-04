@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { ICard } from "../../App";
+import React, { useContext } from "react";
+import { AppCtx, ICard } from "../../App";
 import './style.scss';
 
 interface Props {
@@ -8,12 +8,8 @@ interface Props {
 
 const Card: React.FunctionComponent<Props> = ({data}) => {
 
+  const { onToggleActive } = useContext(AppCtx);
   const { id, title, address, population, booking, cost, area, active } = data;
-  const [isActive, setisActive] = useState<boolean>(active);
-
-  useEffect(() => {
-    setisActive(active)
-  }, [active]);
 
   return <div className="card">
     <div className="card__image" style={ id > 6 ? { backgroundImage: `url(${process.env.PUBLIC_URL}/images/default_img.jpeg)` } : { backgroundImage: `url(${process.env.PUBLIC_URL}/images/img${id}.jpeg)` }}></div>
@@ -23,7 +19,7 @@ const Card: React.FunctionComponent<Props> = ({data}) => {
           <h1 className="title">{title}</h1>
           <p className="address">{address}</p>
         </div>
-        <input type="checkbox" id={`switch${id}`} defaultChecked={isActive} onChange={ () => setisActive(!isActive)}/>
+        <input type="checkbox" id={`switch${id}`} defaultChecked={active} onChange={ () => onToggleActive(id)}/>
         <label htmlFor={`switch${id}`}></label>
       </div>
       <div className="stats">

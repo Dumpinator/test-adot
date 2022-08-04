@@ -17,15 +17,19 @@ export interface ICard{
 
 export interface CardsContextProps {
   addCard: (newCard: ICard) => void;
+  onToggleActive: (id: number) => void;
   cards: ICard[];
 }
 
 export const AppCtx = createContext<CardsContextProps>({
   addCard: () => {},
+  onToggleActive: (id) => {},
   cards: [],
 });
 
 const App: FunctionComponent = () => {
+
+
 
   const [cards, setCards] = useLocalStorage
     ("cards",[
@@ -93,12 +97,24 @@ const App: FunctionComponent = () => {
 
   const addCard = useCallback(
     (newCard: ICard) => setCards([...cards, newCard]),
-    [cards]
+    [cards, setCards]
   );
+
+  const onToggleActive = useCallback(
+    (id: number) => {
+        setCards(
+            cards.map(card => {
+                if ( card.id === id ) { card.active = !card.active }
+                //else card.active = false
+                return card
+            })
+        )
+    }, [cards, setCards])
 
   return (
     <AppCtx.Provider value={{
       addCard,
+      onToggleActive,
       cards,
     }}>
 
