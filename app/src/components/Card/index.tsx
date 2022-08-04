@@ -16,7 +16,7 @@ const Card: React.FunctionComponent<Props> = ({data}) => {
   }, [active]);
 
   return <div className="card">
-    <div className="card__image" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/images/img${id}.jpeg)`}}></div>
+    <div className="card__image" style={ id > 6 ? { backgroundImage: `url(${process.env.PUBLIC_URL}/images/default_img.jpeg)` } : { backgroundImage: `url(${process.env.PUBLIC_URL}/images/img${id}.jpeg)` }}></div>
     <div className="card__content">
       <div className="infos">
         <div className="infos__content">

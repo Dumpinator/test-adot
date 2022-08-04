@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { AppCtx, ICard } from "../../App";
-import { nanoid } from 'nanoid'
 import CardsList from "../../components/CardsList/CardsList";
 import { Modal } from "../../components/Modal/modal";
 import { useModal } from "../../useModal";
@@ -9,21 +8,22 @@ import './style.scss';
 const Home: React.FunctionComponent = () => {
 
   const { isShown, toggle } = useModal();
-  const { addCard } = useContext(AppCtx);
+  const { addCard, cards } = useContext(AppCtx);
 
-  const [formData, setFormData] = React.useState<ICard | {}>();
+  const [formData, setFormData] = React.useState<ICard | {}>({});
 
-  const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
+  const handleForm = useCallback(
+    (e: React.FormEvent<HTMLInputElement>): void => {
     setFormData({
-      id: nanoid(),
+      id: cards.length + 1,
       ...formData,
       [e.currentTarget.id]: e.currentTarget.value,
     });
-  };
+  }, [cards, formData]);
 
-  const handleSaveCard = (e: React.FormEvent, formData: ICard| any) => {
+  const handleSaveCard = (e: React.FormEvent, formData: ICard | {}) => {
     e.preventDefault();
-    addCard(formData);
+    addCard(formData as ICard);
   };
 
   const content = <React.Fragment>
@@ -42,7 +42,7 @@ const Home: React.FunctionComponent = () => {
         <label htmlFor="active">Activer</label>
       </div>
       <div className="btn">
-        <button className="btn__cancel" onClick={toggle}>Cancel</button>
+        <button className="btn__cancel" type="button" onClick={toggle}>Cancel</button>
         <button type="submit"
           onClick={(e) => {
             e.preventDefault();

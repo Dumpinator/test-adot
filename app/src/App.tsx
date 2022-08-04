@@ -1,5 +1,6 @@
-import { createContext, FunctionComponent, useCallback, useState } from 'react';
+import { createContext, FunctionComponent, useCallback } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import useLocalStorage from "./hooks/useLocalStorage";
 import Home from './pages/Home';
 import './App.scss';
 
@@ -26,8 +27,8 @@ export const AppCtx = createContext<CardsContextProps>({
 
 const App: FunctionComponent = () => {
 
-  const [cards, setCards] = useState<ICard[]>
-    ([
+  const [cards, setCards] = useLocalStorage
+    ("cards",[
       {
       id: 1,
       title: "Copenhagen",

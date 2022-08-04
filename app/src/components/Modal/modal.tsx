@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import './style.scss';
 
@@ -16,11 +16,14 @@ export const Modal: FunctionComponent<ModalProps> = ({
   headerText,
 }) => {
 
-  const onKeyDown = (event: KeyboardEvent) => {
-    if (event.keyCode === 27 && isShown) {
-      hide();
-    }
-  };
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.keyCode === 27 && isShown) {
+        hide();
+      }
+    },
+    [isShown, hide]
+  );
 
     useEffect(() => {
     isShown
@@ -30,7 +33,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
     return () => {
         document.removeEventListener("keydown", onKeyDown, false);
     };
-    }, [isShown]);
+    }, [isShown, onKeyDown]);
 
   const modal = (
     <React.Fragment>
@@ -39,7 +42,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
         <div className='styledModal'>
           <div className='header'>
             <div className='headerText'>{headerText}</div>
-            <div className='closeButton' typeof="button" data-dismiss="modal" aria-label="Close" onClick={hide}>X</div>
+            <button className='closeButton' type="button" data-dismiss="modal" aria-label="Close" onClick={hide}>X</button>
           </div>
           <div className='contentModal'>{modalContent}</div>
         </div>
