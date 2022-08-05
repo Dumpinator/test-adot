@@ -15,7 +15,6 @@ export const Modal: FunctionComponent<ModalProps> = ({
   modalContent,
   headerText,
 }) => {
-
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (event.keyCode === 27 && isShown) {

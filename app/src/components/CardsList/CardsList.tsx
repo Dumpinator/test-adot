@@ -14,8 +14,8 @@ const CardsList: React.FunctionComponent = () => {
         if (i > 5 ) {
           const nanoid = customAlphabet('1234567890', 10)
           const randomId = parseInt( nanoid() );
-          console.log(randomId);
-          item.id = randomId }
+          item.id = randomId
+        }
         return <Card key={ item.id } data={item} />
       })
     }
