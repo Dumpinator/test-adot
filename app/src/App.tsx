@@ -2,18 +2,8 @@ import { createContext, FunctionComponent, useCallback } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import useLocalStorage from "./hooks/useLocalStorage";
 import Home from './pages/Home';
+import { ICard } from './components/Card';
 import './App.scss';
-
-export interface ICard{
-    id: number,
-    title: string,
-    address: string,
-    population: number,
-    booking: number,
-    cost: number,
-    area: number,
-    active: boolean,
-};
 
 export interface CardsContextProps {
   addCard: (newCard: ICard) => void;
@@ -28,8 +18,6 @@ export const AppCtx = createContext<CardsContextProps>({
 });
 
 const App: FunctionComponent = () => {
-
-
 
   const [cards, setCards] = useLocalStorage
     ("cards",[
@@ -105,7 +93,6 @@ const App: FunctionComponent = () => {
         setCards(
             cards.map(card => {
                 if ( card.id === id ) { card.active = !card.active }
-                //else card.active = false
                 return card
             })
         )

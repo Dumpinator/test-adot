@@ -1,7 +1,6 @@
 
-import { useState } from "react";
-import { ICard } from "../App";
-
+import { useState } from "react";S
+import { ICard } from "../components/Card";
 
 const useLocalStorage = (key: string, initialValue: ICard[]) => {
 

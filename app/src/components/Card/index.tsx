@@ -1,10 +1,21 @@
 import React, { useContext } from "react";
 import { AppCtx, ICard } from "../../App";
 import './style.scss';
-
+/*
 interface Props {
   data: ICard;
 }
+*/
+export interface ICard{
+    id: number,
+    title: string,
+    address: string,
+    population: number,
+    booking: number,
+    cost: number,
+    area: number,
+    active: boolean,
+};
 
 const Card: React.FunctionComponent<Props> = ({data}) => {
 
